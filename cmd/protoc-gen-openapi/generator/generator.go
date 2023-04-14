@@ -564,7 +564,7 @@ func (g *OpenAPIv3Generator) buildOperationV3(
 
 		if bodyField == "*" {
 			// Pass the entire request message as the request body.
-			requestSchema = g.reflect.schemaOrReferenceForMessage(inputMessage.Desc)
+			requestSchema = g.reflect.schemaForMessage(inputMessage.Desc)
 
 		} else {
 			// If body refers to a message field, use that type.
@@ -581,7 +581,7 @@ func (g *OpenAPIv3Generator) buildOperationV3(
 						}
 
 					case protoreflect.MessageKind:
-						requestSchema = g.reflect.schemaOrReferenceForMessage(field.Message.Desc)
+						requestSchema = g.reflect.schemaForMessage(field.Message.Desc)
 
 					default:
 						log.Printf("unsupported field type %+v", field.Desc)
